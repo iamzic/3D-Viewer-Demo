@@ -5,6 +5,9 @@ import { MTLLoader } from 'https://unpkg.com/three@0.159.0/examples/jsm/loaders/
 
 let scene, camera, renderer, controls, currentModel;
 
+// Expose THREE to window for debugging/console access (optional, but matches example)
+window.THREE = THREE;
+
 // Initialize the scene
 function init() {
     try {
@@ -106,9 +109,18 @@ function animate() {
 // Initialize the viewer when the script loads
 init();
 
+// Expose model loader for debugging (optional)
+window.loadModel = loadModel;
+
 // Handle model selection
 document.getElementById('model-select').addEventListener('change', function(e) {
     if (e.target.value) {
         loadModel(e.target.value);
     }
 });
+
+// Handle window resize (dispatch event, similar to example)
+window.addEventListener('resize', onWindowResize);
+
+// Initial resize
+onWindowResize();
