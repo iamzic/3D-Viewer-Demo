@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Object Viewer</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Load Three.js and its modules -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r159/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/loaders/MTLLoader.js"></script>
 </head>
 <body>
     <div class="container">
@@ -22,20 +17,49 @@
             </select>
         </div>
     </div>
-    <!-- Load our viewer script after Three.js is loaded -->
+
+    <!-- Load Three.js and its modules -->
     <script>
-        // Wait for all scripts to load
-        window.addEventListener('load', function() {
-            // Check if THREE is defined
-            if (typeof THREE === 'undefined') {
-                console.error('Three.js failed to load');
-                return;
+        // Function to load a script and return a promise
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+                document.head.appendChild(script);
+            });
+        }
+
+        // Load all required scripts in sequence
+        async function loadAllScripts() {
+            try {
+                console.log('Loading Three.js...');
+                await loadScript('https://unpkg.com/three@0.159.0/build/three.min.js');
+                console.log('Three.js loaded successfully');
+
+                console.log('Loading OrbitControls...');
+                await loadScript('https://unpkg.com/three@0.159.0/examples/js/controls/OrbitControls.js');
+                console.log('OrbitControls loaded successfully');
+
+                console.log('Loading OBJLoader...');
+                await loadScript('https://unpkg.com/three@0.159.0/examples/js/loaders/OBJLoader.js');
+                console.log('OBJLoader loaded successfully');
+
+                console.log('Loading MTLLoader...');
+                await loadScript('https://unpkg.com/three@0.159.0/examples/js/loaders/MTLLoader.js');
+                console.log('MTLLoader loaded successfully');
+
+                console.log('Loading viewer script...');
+                await loadScript('viewer.js');
+                console.log('Viewer script loaded successfully');
+            } catch (error) {
+                console.error('Error loading scripts:', error);
             }
-            // Load our viewer script
-            const script = document.createElement('script');
-            script.src = 'viewer.js';
-            document.body.appendChild(script);
-        });
+        }
+
+        // Start loading scripts
+        loadAllScripts();
     </script>
 </body>
 </html> 
