@@ -47,89 +47,49 @@ function init() {
 }
 
 // Load OBJ model with materials
-function loadModel(modelPath) {
+async function loadModel(modelPath) {
     // Remove current model if exists
     if (currentModel) {
         scene.remove(currentModel);
     }
 
-    const objLoader = new THREE.OBJLoader();
-    const mtlLoader = new THREE.MTLLoader();
-    const mtlPath = modelPath.replace('.obj', '.mtl');
+    try {
+        const { OBJLoader } = await import('https://unpkg.com/three@0.159.0/examples/jsm/loaders/OBJLoader.js');
+        const { MTLLoader } = await import('https://unpkg.com/three@0.159.0/examples/jsm/loaders/MTLLoader.js');
+        
+        const objLoader = new OBJLoader();
+        const mtlLoader = new MTLLoader();
+        const mtlPath = modelPath.replace('.obj', '.mtl');
 
-    // Load materials first
-    mtlLoader.load(
-        mtlPath,
-        function(materials) {
+        // Load materials first
+        try {
+            const materials = await mtlLoader.loadAsync(mtlPath);
             materials.preload();
             objLoader.setMaterials(materials);
-            
-            // Then load the model
-            objLoader.load(
-                modelPath,
-                function(object) {
-                    currentModel = object;
-                    
-                    // Center the model
-                    const box = new THREE.Box3().setFromObject(object);
-                    const center = box.getCenter(new THREE.Vector3());
-                    object.position.sub(center);
-
-                    // Scale the model to fit the view
-                    const size = box.getSize(new THREE.Vector3());
-                    const maxDim = Math.max(size.x, size.y, size.z);
-                    const scale = 2 / maxDim;
-                    object.scale.multiplyScalar(scale);
-
-                    scene.add(object);
-                },
-                function(xhr) {
-                    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-                },
-                function(error) {
-                    console.error('An error happened while loading the model:', error);
-                }
-            );
-        },
-        function(xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% materials loaded');
-        },
-        function(error) {
-            console.error('An error happened while loading the materials:', error);
-            // If materials fail to load, try loading the model without materials
-            loadModelWithoutMaterials(modelPath);
+        } catch (error) {
+            console.warn('Failed to load materials, falling back to basic model:', error);
         }
-    );
-}
 
-// Load OBJ model without materials (fallback)
-function loadModelWithoutMaterials(modelPath) {
-    const loader = new THREE.OBJLoader();
-    loader.load(
-        modelPath,
-        function(object) {
-            currentModel = object;
-            
-            // Center the model
-            const box = new THREE.Box3().setFromObject(object);
-            const center = box.getCenter(new THREE.Vector3());
-            object.position.sub(center);
+        // Load the model
+        const object = await objLoader.loadAsync(modelPath);
+        currentModel = object;
+        
+        // Center the model
+        const box = new THREE.Box3().setFromObject(object);
+        const center = box.getCenter(new THREE.Vector3());
+        object.position.sub(center);
 
-            // Scale the model to fit the view
-            const size = box.getSize(new THREE.Vector3());
-            const maxDim = Math.max(size.x, size.y, size.z);
-            const scale = 2 / maxDim;
-            object.scale.multiplyScalar(scale);
+        // Scale the model to fit the view
+        const size = box.getSize(new THREE.Vector3());
+        const maxDim = Math.max(size.x, size.y, size.z);
+        const scale = 2 / maxDim;
+        object.scale.multiplyScalar(scale);
 
-            scene.add(object);
-        },
-        function(xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-        },
-        function(error) {
-            console.error('An error happened while loading the model:', error);
-        }
-    );
+        scene.add(object);
+        console.log('Model loaded successfully');
+    } catch (error) {
+        console.error('Error loading model:', error);
+    }
 }
 
 // Handle window resize
