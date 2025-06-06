@@ -1,12 +1,12 @@
+import * as THREE from 'https://unpkg.com/three@0.159.0/build/three.module.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.159.0/examples/jsm/controls/OrbitControls.js';
+import { OBJLoader } from 'https://unpkg.com/three@0.159.0/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'https://unpkg.com/three@0.159.0/examples/jsm/loaders/MTLLoader.js';
+
 let scene, camera, renderer, controls, currentModel;
 
 // Initialize the scene
 function init() {
-    if (typeof THREE === 'undefined') {
-        console.error('Three.js is not loaded');
-        return;
-    }
-
     try {
         // Create scene
         scene = new THREE.Scene();
@@ -22,7 +22,7 @@ function init() {
         document.getElementById('viewer').appendChild(renderer.domElement);
 
         // Add orbit controls
-        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
 
@@ -54,9 +54,6 @@ async function loadModel(modelPath) {
     }
 
     try {
-        const { OBJLoader } = await import('https://unpkg.com/three@0.159.0/examples/jsm/loaders/OBJLoader.js');
-        const { MTLLoader } = await import('https://unpkg.com/three@0.159.0/examples/jsm/loaders/MTLLoader.js');
-        
         const objLoader = new OBJLoader();
         const mtlLoader = new MTLLoader();
         const mtlPath = modelPath.replace('.obj', '.mtl');
