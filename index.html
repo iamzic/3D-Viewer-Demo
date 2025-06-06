@@ -18,14 +18,7 @@
         </div>
     </div>
 
-    <!-- Load Three.js and add-ons from CDN as modules, then load viewer.js -->
-    <script type="module">
-      import * as THREE from 'https://unpkg.com/three@0.159.0/build/three.module.js';
-      import { OrbitControls } from 'https://unpkg.com/three@0.159.0/examples/jsm/controls/OrbitControls.js';
-      import { OBJLoader } from 'https://unpkg.com/three@0.159.0/examples/jsm/loaders/OBJLoader.js';
-      import { MTLLoader } from 'https://unpkg.com/three@0.159.0/examples/jsm/loaders/MTLLoader.js';
-      import './viewer.js';
-      // The viewer.js file already imports these modules, so this script ensures module context.
-    </script>
+    <!-- Load viewer script as a module -->
+    <script type="module" src="viewer.js"></script>
 </body>
 </html>
