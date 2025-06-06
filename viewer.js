@@ -111,4 +111,4 @@ document.getElementById('model-select').addEventListener('change', function(e) {
     if (e.target.value) {
         loadModel(e.target.value);
     }
-}); 
+});
