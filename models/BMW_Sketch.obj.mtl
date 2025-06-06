@@ -1,0 +1,231 @@
+
+newmtl Standard_FF0000
+Kd  1 0 0
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_FFF7F3
+Kd  1 0.9686275 0.9529412
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_000000
+Kd  0 0 0
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_626262
+Kd  0.3843137 0.3843137 0.3843137
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_D1E3FF
+Kd  0.8196079 0.8901961 1
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_545151
+Kd  0.3294118 0.3176471 0.3176471
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_1B9876
+Kd  0.1058824 0.5960785 0.4627451
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_2E2E2E
+Kd  0.1803922 0.1803922 0.1803922
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Reflective_8F8F8F_r0.02_m0.25
+Kd  0.5607843 0.5607843 0.5607843
+Ks  0.8901961 0.8901961 0.8901961
+Ka  0 0 0
+d  1
+Ns  980
+illum 5
+
+
+
+
+newmtl Reflective_F0F0F0_r0.02_m0.25
+Kd  0.9411765 0.9411765 0.9411765
+Ks  0.9852941 0.9852941 0.9852941
+Ka  0 0 0
+d  1
+Ns  980
+illum 5
+
+
+
+
+newmtl Phong_D7331B_r0.90
+Kd  0.8431373 0.2 0.1058824
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  100
+illum 2
+
+
+
+
+newmtl Phong_3D3D3D_r0.90
+Kd  0.2392157 0.2392157 0.2392157
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  100
+illum 2
+
+
+
+
+newmtl Phong_3E3E3E_r0.90
+Kd  0.2431373 0.2431373 0.2431373
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  100
+illum 2
+
+
+
+
+newmtl Phong_A1A1A1_r0.90
+Kd  0.6313726 0.6313726 0.6313726
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  100
+illum 2
+
+
+
+
+newmtl Phong_000000_r0.90
+Kd  0 0 0
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  100
+illum 2
+
+
+
+
+newmtl Phong_232323_r0.90
+Kd  0.1372549 0.1372549 0.1372549
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  100
+illum 2
+
+
+
+
+newmtl Standard_FFFFFF
+Kd  1 1 1
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_FFECE2
+Kd  1 0.9254902 0.8862745
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Reflective_000000_r0.02_m0.25
+Kd  0 0 0
+Ks  0.75 0.75 0.75
+Ka  0 0 0
+d  1
+Ns  980
+illum 5
+
+
+
+
+newmtl Cartoon_000000_s0.50_out1.50
+Kd  0 0 0
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
+
+newmtl Standard_737373
+Kd  0.4509804 0.4509804 0.4509804
+Ks  0 0 0
+Ka  0 0 0
+d  1
+Ns  0
+illum 1
+
+
+
