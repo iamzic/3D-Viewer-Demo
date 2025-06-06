@@ -2,37 +2,48 @@ let scene, camera, renderer, controls, currentModel;
 
 // Initialize the scene
 function init() {
-    // Create scene
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xf0f0f0);
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js is not loaded');
+        return;
+    }
 
-    // Create camera
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 5;
+    try {
+        // Create scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0xf0f0f0);
 
-    // Create renderer
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight - 80); // Account for controls height
-    document.getElementById('viewer').appendChild(renderer.domElement);
+        // Create camera
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
 
-    // Add orbit controls
-    controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+        // Create renderer
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight - 80); // Account for controls height
+        document.getElementById('viewer').appendChild(renderer.domElement);
 
-    // Add lights
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambientLight);
+        // Add orbit controls
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-    directionalLight.position.set(1, 1, 1);
-    scene.add(directionalLight);
+        // Add lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
 
-    // Handle window resize
-    window.addEventListener('resize', onWindowResize, false);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(1, 1, 1);
+        scene.add(directionalLight);
 
-    // Start animation loop
-    animate();
+        // Handle window resize
+        window.addEventListener('resize', onWindowResize, false);
+
+        // Start animation loop
+        animate();
+
+        console.log('3D viewer initialized successfully');
+    } catch (error) {
+        console.error('Error initializing 3D viewer:', error);
+    }
 }
 
 // Load OBJ model with materials
@@ -135,8 +146,8 @@ function animate() {
     renderer.render(scene, camera);
 }
 
-// Initialize the viewer when the page loads
-window.addEventListener('load', init);
+// Initialize the viewer when the script loads
+init();
 
 // Handle model selection
 document.getElementById('model-select').addEventListener('change', function(e) {

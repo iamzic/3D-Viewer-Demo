@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D Object Viewer</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Load Three.js and its modules -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r159/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.159.0/examples/js/loaders/OBJLoader.js"></script>
@@ -21,6 +22,20 @@
             </select>
         </div>
     </div>
-    <script src="viewer.js"></script>
+    <!-- Load our viewer script after Three.js is loaded -->
+    <script>
+        // Wait for all scripts to load
+        window.addEventListener('load', function() {
+            // Check if THREE is defined
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js failed to load');
+                return;
+            }
+            // Load our viewer script
+            const script = document.createElement('script');
+            script.src = 'viewer.js';
+            document.body.appendChild(script);
+        });
+    </script>
 </body>
 </html> 
